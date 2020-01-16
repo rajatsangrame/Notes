@@ -52,7 +52,7 @@ public abstract class NoteRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            mDao.deleteAll();
+            //mDao.deleteAll();
             return null;
         }
     }

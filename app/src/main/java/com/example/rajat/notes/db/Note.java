@@ -77,7 +77,7 @@ public class Note {
     }
 
     /**
-     * get current timestamp and convert to string
+     * Get current timestamp and convert to string
      *
      * @return String date for ex Thursday, 15 Jan 2020
      */

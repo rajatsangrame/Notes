@@ -24,6 +24,10 @@ public class NoteRepository {
         return allNotes;
     }
 
+    public Note getNoteById(int id) {
+        return mNoteDao.getNote(id);
+    }
+
     public void insert(Note note) {
         new insertAsyncTask(mNoteDao).execute(note);
     }
