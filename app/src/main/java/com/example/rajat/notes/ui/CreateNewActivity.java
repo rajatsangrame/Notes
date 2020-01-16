@@ -1,14 +1,16 @@
-package com.example.rajat.notes;
+package com.example.rajat.notes.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.rajat.notes.R;
+
+public class CreateNewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_create_new);
     }
 }

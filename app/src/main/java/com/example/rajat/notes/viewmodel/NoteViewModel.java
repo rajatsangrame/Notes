@@ -22,7 +22,7 @@ public class NoteViewModel extends AndroidViewModel {
         allNotes = repository.getAllNotes();
     }
 
-    LiveData<List<Note>> getAllNotes() {
+    public LiveData<List<Note>> getAllNotes() {
         return allNotes;
     }
 
