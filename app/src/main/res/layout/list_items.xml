@@ -19,7 +19,7 @@
         tools:context=".ui.MainActivity">
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             style="@style/TextViewStyleBold"
             android:layout_width="0dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/sample_title" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_desc"
             style="@style/TextViewStyleRegular"
             android:layout_width="0dp"

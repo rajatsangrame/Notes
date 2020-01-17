@@ -12,59 +12,66 @@
             type="com.example.rajat.notes.db.Note" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/AppTheme.Bold"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{note.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/sample_title" />
+            android:layout_margin="16dp"
+            tools:context=".ui.MainActivity">
 
-        <TextView
-            android:id="@+id/tv_desc"
-            style="@style/TextViewStyleRegular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{note.desc}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:text="@string/sample_note" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_timestamp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                style="@style/AppTheme.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{note.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/sample_title" />
 
-        <TextView
-            android:id="@+id/tv_timestamp"
-            style="@style/TextViewStyleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{BindingUtils.getTimeStampString(note.timestamp)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:text="@string/sample_timestamp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_desc"
+                style="@style/TextViewStyleRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{note.desc}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="@string/sample_note" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_timestamp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_timestamp"
+                style="@style/TextViewStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{BindingUtils.getTimeStampString(note.timestamp)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                tools:text="@string/sample_timestamp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
