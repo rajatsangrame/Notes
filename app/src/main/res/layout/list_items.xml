@@ -35,7 +35,8 @@
             style="@style/TextViewStyleRegular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
             android:text="@{note.desc}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,17 +55,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
-        <TextView
-            android:id="@+id/tv_timestamp"
-            style="@style/TextViewStyleSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{BindingUtils.getTimeStampString(note.timestamp)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:text="@string/sample_timestamp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

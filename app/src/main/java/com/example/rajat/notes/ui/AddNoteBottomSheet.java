@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.rajat.notes.R;
 import com.example.rajat.notes.databinding.FragmentBottomSheetBinding;
+import com.example.rajat.notes.db.Note;
 import com.example.rajat.notes.interfaces.OnBottomSheetListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -120,11 +122,19 @@ public class AddNoteBottomSheet extends BottomSheetDialogFragment implements Vie
                 listener.onError("Empty Note");
                 return;
             } else {
-                listener.onSave(binding.etTitle.getText().toString(), binding.etNote.getText().toString());
+                Note note = new Note(binding.etTitle.getText().toString(),
+                        binding.etNote.getText().toString(),
+                        System.currentTimeMillis());
+                listener.onSave(note);
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra(getString(R.string.note), note.toJsonString());
+                startActivity(intent);
             }
             dismiss();
+
         } else if (v.getId() == R.id.btn_close) {
             dismiss();
         }
     }
+
 }

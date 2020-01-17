@@ -59,11 +59,13 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
         return true;
     }
 
+    AddNoteBottomSheet bottomSheet;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                AddNoteBottomSheet bottomSheet = new AddNoteBottomSheet(this);
+                bottomSheet = new AddNoteBottomSheet(this);
                 bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
                 return true;
             default:
@@ -72,10 +74,10 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
     }
 
     @Override
-    public void onSave(String title, String desc) {
+    public void onSave(Note note) {
 
-        mViewModel.insert(new Note(title, desc, System.currentTimeMillis()));
-        Log.i(TAG, "onSave Note Added: " + title);
+        mViewModel.insert(note);
+        Log.i(TAG, "onSave Note Added: " + note.getTitle());
     }
 
     @Override
