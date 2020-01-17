@@ -6,12 +6,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.rajat.notes.R;
@@ -87,9 +91,22 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
     }
 
     @Override
-    public void onItemClick(Note note) {
+    public void onItemClick(Note note, View v) {
+
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(getString(R.string.note), note.toJsonString());
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            View v1 = v.findViewById(R.id.tv_title);
+            View v2 = v.findViewById(R.id.tv_desc);
+            final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                    this,
+                    Pair.create(v1, v1.getTransitionName()), Pair.create(v2, v2.getTransitionName()));
+
+            startActivity(intent, options.toBundle());
+            return;
+        }
+
         startActivity(intent);
     }
 }

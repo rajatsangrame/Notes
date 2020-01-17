@@ -1,5 +1,7 @@
 package com.example.rajat.notes.interfaces;
 
+import android.view.View;
+
 import com.example.rajat.notes.db.Note;
 
 /**
@@ -8,6 +10,6 @@ import com.example.rajat.notes.db.Note;
  */
 public interface OnItemClickListener {
 
-    void onItemClick(Note note);
+    void onItemClick(Note note, View view);
 
 }
