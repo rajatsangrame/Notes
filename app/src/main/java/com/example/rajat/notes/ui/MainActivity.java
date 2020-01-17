@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        setSupportActionBar(binding.toolbar);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         NoteViewModel viewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         viewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
