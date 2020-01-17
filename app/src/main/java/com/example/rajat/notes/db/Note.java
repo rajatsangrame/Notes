@@ -1,20 +1,15 @@
 package com.example.rajat.notes.db;
 
-import android.text.format.DateFormat;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Calendar;
-import java.util.Locale;
 
 /***
  * Model class for Notes.
  *
  * Simple variable names.
- * Only additional method is {@link this.getTimeStampString} to convert timestamp to string
  *
  */
 @Entity(tableName = "note_table")
@@ -76,14 +71,4 @@ public class Note {
         this.timestamp = timestamp;
     }
 
-    /**
-     * Get current timestamp and convert to string
-     *
-     * @return String date for ex Thursday, 15 Jan 2020
-     */
-    public String getTimeStampString() {
-        Calendar cal = Calendar.getInstance(Locale.getDefault());
-        cal.setTimeInMillis(this.timestamp * 1000);
-        return DateFormat.format("EEEE, dd-MM-yyyy", cal).toString();
-    }
 }

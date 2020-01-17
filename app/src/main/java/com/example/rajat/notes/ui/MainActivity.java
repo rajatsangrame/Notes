@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Adapter;
 
 import com.example.rajat.notes.R;
+import com.example.rajat.notes.adapter.NotesAdapter;
 import com.example.rajat.notes.databinding.ActivityMainBinding;
 import com.example.rajat.notes.db.Note;
 import com.example.rajat.notes.viewmodel.NoteViewModel;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Note> notes) {
 
+                NotesAdapter adapter = new NotesAdapter(notes);
+                binding.recyclerView.setAdapter(adapter);
                 Log.i(TAG, "onChanged: " + notes.size());
             }
         });

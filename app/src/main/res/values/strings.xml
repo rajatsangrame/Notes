@@ -2,4 +2,12 @@
     <string name="app_name">Notes</string>
     <string name="add">Add</string>
 
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+
+    <string name="sample_title">What is Lorem Ipsum?</string>
+    <string name="sample_note">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+    <string name="sample_timestamp">Thursday, 16 Feb 2020</string>
+
+
 </resources>
