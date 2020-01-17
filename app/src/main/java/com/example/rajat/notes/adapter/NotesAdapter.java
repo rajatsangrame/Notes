@@ -1,6 +1,7 @@
 package com.example.rajat.notes.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,15 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rajat.notes.databinding.ListItemsBinding;
 import com.example.rajat.notes.db.Note;
+import com.example.rajat.notes.interfaces.OnItemClickListener;
 
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
     private List<Note> mNotes;
+    private OnItemClickListener listener;
 
-    public NotesAdapter(List<Note> notes) {
+    public NotesAdapter(){
+    }
+
+    public void setNotes(List<Note> notes) {
         mNotes = notes;
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,13 +52,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         else return 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ListItemsBinding binding;
 
         private ViewHolder(@NonNull ListItemsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }

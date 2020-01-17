@@ -12,20 +12,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Adapter;
+import android.widget.Toast;
 
 import com.example.rajat.notes.R;
 import com.example.rajat.notes.adapter.NotesAdapter;
 import com.example.rajat.notes.databinding.ActivityMainBinding;
 import com.example.rajat.notes.db.Note;
+import com.example.rajat.notes.interfaces.OnBottomSheetListener;
+import com.example.rajat.notes.interfaces.OnItemClickListener;
 import com.example.rajat.notes.viewmodel.NoteViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnBottomSheetListener, OnItemClickListener {
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
+    NoteViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        NoteViewModel viewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        viewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
+        mViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
+        final NotesAdapter adapter = new NotesAdapter();
+        adapter.setListener(this);
+        mViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(List<Note> notes) {
-
-                NotesAdapter adapter = new NotesAdapter(notes);
+                adapter.setNotes(notes);
                 binding.recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 Log.i(TAG, "onChanged: " + notes.size());
             }
         });
@@ -58,10 +63,31 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                startActivity(new Intent(this, CreateNewActivity.class));
+                AddNoteBottomSheet bottomSheet = new AddNoteBottomSheet(this);
+                bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onSave(String title, String desc) {
+
+        mViewModel.insert(new Note(title, desc, System.currentTimeMillis()));
+        Log.i(TAG, "onSave Note Added: " + title);
+    }
+
+    @Override
+    public void onError(String message) {
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(Note note) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(getString(R.string.note), note.toString());
+        startActivity(intent);
     }
 }

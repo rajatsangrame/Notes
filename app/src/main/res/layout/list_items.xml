@@ -21,6 +21,7 @@
 
         <TextView
             android:id="@+id/tv_title"
+            style="@style/TextViewStyleBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{note.title}"
@@ -31,6 +32,7 @@
 
         <TextView
             android:id="@+id/tv_desc"
+            style="@style/TextViewStyleRegular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -54,11 +56,11 @@
 
         <TextView
             android:id="@+id/tv_timestamp"
+            style="@style/TextViewStyleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{BindingUtils.getTimeStampString(note.timestamp)}"
-            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
