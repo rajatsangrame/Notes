@@ -48,4 +48,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.arch_lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.arch_lifecycle_version"
 
+    //Gson
+    implementation "com.google.code.gson:gson:$rootProject.gson_verison"
+
 }

@@ -18,7 +18,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     private List<Note> mNotes;
     private OnItemClickListener listener;
 
-    public NotesAdapter(){
+    public NotesAdapter() {
     }
 
     public void setNotes(List<Note> notes) {
@@ -65,6 +65,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         @Override
         public void onClick(View view) {
 
+            listener.onItemClick(mNotes.get(getAdapterPosition()));
         }
     }
 }

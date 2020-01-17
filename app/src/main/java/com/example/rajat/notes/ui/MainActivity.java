@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
     @Override
     public void onItemClick(Note note) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(getString(R.string.note), note.toString());
+        intent.putExtra(getString(R.string.note), note.toJsonString());
         startActivity(intent);
     }
 }

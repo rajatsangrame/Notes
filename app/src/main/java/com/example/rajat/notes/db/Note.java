@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.Gson;
+
 
 /***
  * Model class for Notes.
@@ -71,4 +73,7 @@ public class Note {
         this.timestamp = timestamp;
     }
 
+    public String toJsonString() {
+        return new Gson().toJson(this);
+    }
 }
