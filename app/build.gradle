@@ -23,17 +23,19 @@ android {
 }
 
 dependencies {
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Testing
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "junit:junit:$rootProject.junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.junit_ext_version"
+    androidTestImplementation "androidx.test:rules:$rootProject.junit_runner_version"
+    androidTestImplementation "androidx.test:runner:$rootProject.junit_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espresso_version"
+    implementation "androidx.test.espresso:espresso-idling-resource:$rootProject.espresso_version"
 
-    //Android X and Material
+    //AndroidX and Material
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat_verison"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recycler_view_version"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout_version"
@@ -50,5 +52,4 @@ dependencies {
 
     //Gson
     implementation "com.google.code.gson:gson:$rootProject.gson_verison"
-
 }

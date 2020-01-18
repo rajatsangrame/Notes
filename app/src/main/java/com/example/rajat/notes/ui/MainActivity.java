@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
                 adapter.setNotes(notes);
                 binding.recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
+                if (notes.size() > 0) {
+                    binding.layoutNoNotes.setVisibility(View.GONE);
+                }
                 Log.i(TAG, "onChanged: " + notes.size());
             }
         });
@@ -69,12 +72,16 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                bottomSheet = new AddNoteBottomSheet(this);
-                bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
+                performMenuItemClick();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void performMenuItemClick() {
+        bottomSheet = new AddNoteBottomSheet(this);
+        bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
     }
 
     @Override

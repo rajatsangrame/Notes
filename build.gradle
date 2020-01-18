@@ -29,6 +29,10 @@ allprojects {
         room_version = '2.2.3'
         arch_lifecycle_version = '2.2.0-rc03'
         gson_verison = '2.8.6'
+        espresso_version = '3.2.0'
+        junit_version = '4.12'
+        junit_runner_version = '1.2.0'
+        junit_ext_version = '1.1.0'
     }
 }
 
