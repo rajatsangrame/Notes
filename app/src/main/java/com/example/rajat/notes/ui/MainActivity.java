@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
 import com.example.rajat.notes.R;
 import com.example.rajat.notes.adapter.NotesAdapter;
 import com.example.rajat.notes.databinding.ActivityMainBinding;

@@ -15,7 +15,13 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
+    /**
+     * List of notes added in DB
+     */
     private List<Note> mNotes;
+    /**
+     * Used for handling adapter click events
+     */
     private OnItemClickListener listener;
 
     public NotesAdapter() {
@@ -41,6 +47,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        /**
+         * DataBinding ViewModel. Check respective xml {@link ListItemsBinding}
+         */
         holder.binding.setNote(mNotes.get(position));
     }
 
