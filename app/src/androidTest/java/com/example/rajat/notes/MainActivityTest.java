@@ -1,10 +1,16 @@
 package com.example.rajat.notes;
 
 import android.util.Log;
+import android.view.View;
 
 import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject;
+import androidx.test.uiautomator.UiSelector;
 
 import com.example.rajat.notes.ui.MainActivity;
 
@@ -17,9 +23,13 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Rajat Sangrame on 18/1/20.
@@ -31,6 +41,7 @@ public class MainActivityTest {
     private static final String TAG = "MainActivityTest";
     private MainActivity mainActivity = null;
     private SimpleIdlingResource idlingResource;
+    private UiDevice uiDevice;
 
     @Rule
     public ActivityTestRule<MainActivity> testRule =
@@ -43,6 +54,7 @@ public class MainActivityTest {
         mainActivity.getSupportFragmentManager().beginTransaction();
         idlingResource = new SimpleIdlingResource();
         IdlingRegistry.getInstance().register(idlingResource);
+        uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
 
     }
 
@@ -68,8 +80,16 @@ public class MainActivityTest {
             //region BottomSheet Testing
             onView(withId(R.id.menu_add)).perform(click());
             onView(withId(R.id.btn_save)).perform(click()); //Error Empty Title
+            UiObject uiObject = uiDevice.findObject(new UiSelector().text("Please add the Title"));
+            if (uiObject.exists()) {
+                uiDevice.pressBack();
+            }
             onView(withId(R.id.et_title)).perform(typeText(title[i]));
             onView(withId(R.id.btn_save)).perform(click());//Error Empty Note
+            uiObject = uiDevice.findObject(new UiSelector().text("Please add the Note"));
+            if (uiObject.exists()) {
+                uiDevice.pressBack();
+            }
             onView(withId(R.id.btn_close)).perform(click());
             //endregion
 
