@@ -19,7 +19,7 @@ import androidx.databinding.DataBindingUtil;
 import com.example.rajat.notes.R;
 import com.example.rajat.notes.databinding.FragmentBottomSheetBinding;
 import com.example.rajat.notes.db.Note;
-import com.example.rajat.notes.interfaces.OnBottomSheetListener;
+import com.example.rajat.notes.interfaces.BottomSheetResult;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -27,26 +27,25 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AddNoteBottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
     private static final String TAG = "AddNoteBottomSheet";
-    private OnBottomSheetListener listener;
-    private FragmentBottomSheetBinding binding;
+    private BottomSheetResult sheetResult;
+    private FragmentBottomSheetBinding mBinding;
 
     public AddNoteBottomSheet() {
     }
 
-    AddNoteBottomSheet(OnBottomSheetListener listener) {
-        this.listener = listener;
+    AddNoteBottomSheet(BottomSheetResult sheetResult) {
+        this.sheetResult = sheetResult;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet, container, false);
-        binding.btnSave.setOnClickListener(this);
-        binding.btnClose.setOnClickListener(this);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet, container, false);
+        mBinding.btnSave.setOnClickListener(this);
+        mBinding.btnClose.setOnClickListener(this);
         disableScrollingWritingNote();
-        return binding.getRoot();
+        return mBinding.getRoot();
     }
 
     @NonNull
@@ -92,7 +91,7 @@ public class AddNoteBottomSheet extends BottomSheetDialogFragment implements Vie
     @SuppressLint("ClickableViewAccessibility")
     private void disableScrollingWritingNote() {
 
-        binding.etNote.setOnTouchListener(new View.OnTouchListener() {
+        mBinding.etNote.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
 
                 view.getParent().requestDisallowInterceptTouchEvent(true);
@@ -115,17 +114,17 @@ public class AddNoteBottomSheet extends BottomSheetDialogFragment implements Vie
     public void onClick(View v) {
 
         if (v.getId() == R.id.btn_save) {
-            if (binding.etTitle.getText().toString().isEmpty()) {
-                listener.onError(getString(R.string.title_empty_error));
+            if (mBinding.etTitle.getText().toString().isEmpty()) {
+                sheetResult.onError(getString(R.string.title_empty_error));
                 return;
-            } else if (binding.etNote.getText().toString().isEmpty()) {
-                listener.onError(getString(R.string.note_empty_error));
+            } else if (mBinding.etNote.getText().toString().isEmpty()) {
+                sheetResult.onError(getString(R.string.note_empty_error));
                 return;
             } else {
-                Note note = new Note(binding.etTitle.getText().toString(),
-                        binding.etNote.getText().toString(),
+                Note note = new Note(mBinding.etTitle.getText().toString(),
+                        mBinding.etNote.getText().toString(),
                         System.currentTimeMillis());
-                listener.onSave(note);
+                sheetResult.onSave(note);
                 Intent intent = new Intent(getContext(), DetailActivity.class);
                 intent.putExtra(getString(R.string.note), note.toJsonString());
                 startActivity(intent);
