@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rajat.notes.databinding.ListItemsBinding;
 import com.example.rajat.notes.db.Note;
-import com.example.rajat.notes.interfaces.OnItemClickListener;
+import com.example.rajat.notes.interfaces.OnNoteItemClickListener;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     /**
      * Used for handling adapter click events
      */
-    private OnItemClickListener listener;
+    private OnNoteItemClickListener listener;
 
     public NotesAdapter() {
     }
@@ -31,7 +31,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         mNotes = notes;
     }
 
-    public void setListener(OnItemClickListener listener) {
+    public void setListener(OnNoteItemClickListener listener) {
         this.listener = listener;
     }
 

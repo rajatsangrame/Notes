@@ -22,12 +22,12 @@ import com.example.rajat.notes.adapter.NotesAdapter;
 import com.example.rajat.notes.databinding.ActivityMainBinding;
 import com.example.rajat.notes.db.Note;
 import com.example.rajat.notes.interfaces.OnBottomSheetListener;
-import com.example.rajat.notes.interfaces.OnItemClickListener;
+import com.example.rajat.notes.interfaces.OnNoteItemClickListener;
 import com.example.rajat.notes.viewmodel.NoteViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnBottomSheetListener, OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements OnBottomSheetListener, OnNoteItemClickListener {
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
