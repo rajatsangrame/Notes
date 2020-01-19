@@ -2,6 +2,7 @@ package com.example.rajat.notes;
 
 import android.util.Log;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -27,9 +28,9 @@ import static androidx.test.espresso.Espresso.onView;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-
     private static final String TAG = "MainActivityTest";
     private MainActivity mainActivity = null;
+    private SimpleIdlingResource idlingResource;
 
     @Rule
     public ActivityTestRule<MainActivity> testRule =
@@ -40,28 +41,42 @@ public class MainActivityTest {
         Log.i(TAG, "@before init: ");
         mainActivity = testRule.getActivity();
         mainActivity.getSupportFragmentManager().beginTransaction();
+        idlingResource = new SimpleIdlingResource();
+        IdlingRegistry.getInstance().register(idlingResource);
+
     }
 
     @After
     public void reset() {
         Log.i(TAG, "@after reset: ");
         mainActivity = null;
+        IdlingRegistry.getInstance().unregister(idlingResource);
     }
 
     /**
      * 10 Test cases in sequence asked in Task
+     * <p>
+     * Open and close Bottom Sheet
+     * <p>
+     * Error message to UI
      */
     @Test
     public void performTest() {
 
         for (int i = 0; i < title.length; i++) {
 
-            //MainActivity
+            //region BottomSheet Testing
             onView(withId(R.id.menu_add)).perform(click());
+            onView(withId(R.id.btn_save)).perform(click()); //Error Empty Title
+            onView(withId(R.id.et_title)).perform(typeText(title[i]));
+            onView(withId(R.id.btn_save)).perform(click());//Error Empty Note
+            onView(withId(R.id.btn_close)).perform(click());
+            //endregion
 
             //BottomSheet
+            onView(withId(R.id.menu_add)).perform(click());
             onView(withId(R.id.et_title)).perform(typeText(title[i]));
-            onView(withId(R.id.et_note)).perform(typeText(desc[i]));
+            onView(withId(R.id.et_note)).perform(typeText(notes[i]));
             onView(withId(R.id.btn_save)).perform(click());
 
             //DetailActivity
@@ -89,7 +104,7 @@ public class MainActivityTest {
             "Ratio enim nostra consentit, pugnat oratio.",
             "Quae contraria sunt his, malane"};
 
-    private String[] desc = {
+    private String[] notes = {
             "Tenetur quod quidem in voluptatem corporis dolorum dicta sit pariatur porro quaerat autem ipsam odit quam beatae tempora quibusdam illum! Modi velit odio nam nulla unde amet odit pariatur at!",
             "Laboriosam quaerat sapiente minima nam minus similique illum architecto et!",
             "Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque quos facere sequi unde optio aliquam!",
@@ -103,5 +118,4 @@ public class MainActivityTest {
             "Consequatur rerum amet fuga expedita sunt et tempora saepe? Iusto nihil explicabo perferendis quos provident delectus ducimus necessitatibus reiciendis optio tempora unde earum doloremque commodi laudantium ad nulla vel odio",
     };
     //endregion
-
 }
