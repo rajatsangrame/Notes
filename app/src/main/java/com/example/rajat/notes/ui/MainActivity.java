@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
     @Override
     public void onError(String message) {
 
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        showErrorMessage(message);
     }
 
     @Override
@@ -115,5 +119,19 @@ public class MainActivity extends AppCompatActivity implements OnBottomSheetList
         }
 
         startActivity(intent);
+    }
+
+    private void showErrorMessage(String message) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setMessage(message)
+                .setCancelable(true)
+                .show();
     }
 }

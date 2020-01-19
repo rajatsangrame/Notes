@@ -116,10 +116,10 @@ public class AddNoteBottomSheet extends BottomSheetDialogFragment implements Vie
 
         if (v.getId() == R.id.btn_save) {
             if (binding.etTitle.getText().toString().isEmpty()) {
-                listener.onError("Empty Title");
+                listener.onError(getString(R.string.title_empty_error));
                 return;
             } else if (binding.etNote.getText().toString().isEmpty()) {
-                listener.onError("Empty Note");
+                listener.onError(getString(R.string.note_empty_error));
                 return;
             } else {
                 Note note = new Note(binding.etTitle.getText().toString(),
