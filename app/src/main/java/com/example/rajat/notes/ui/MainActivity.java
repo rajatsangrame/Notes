@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetResult
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
-    NoteViewModel mViewModel;
+    private NoteViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +58,12 @@ public class MainActivity extends AppCompatActivity implements BottomSheetResult
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_items, menu);
         return true;
     }
-
-    AddNoteBottomSheet bottomSheet;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetResult
     }
 
     private void performMenuItemClick() {
-        bottomSheet = new AddNoteBottomSheet(this);
+        AddNoteBottomSheet bottomSheet = new AddNoteBottomSheet(this);
         bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
     }
 
@@ -103,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements BottomSheetResult
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(getString(R.string.note), note.toJsonString());
 
+        /**
+         * Shared Element transition for multiple Views
+         * Ref: https://developer.android.com/training/transitions/start-activity#start-with-multiple
+         */
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             View v1 = v.findViewById(R.id.tv_title);
             View v2 = v.findViewById(R.id.tv_desc);
